@@ -146,6 +146,16 @@ erDiagram
 
 ## Section F — Six probe questions answered explicitly
 
+1. What is the grain of `subscriptions`?
+2. How is MRR stored / how do I compute it?
+3. What `status` values exist with counts?
+
+<img width="243" height="175" alt="image" src="https://github.com/user-attachments/assets/40adffc1-c708-4a90-ae6d-c7fa0fdfb151" />
+
+4. How do I distinguish trial from paid?
+5. What timezone are timestamps in?
+6. Is there a soft-delete pattern?
+
 ## Section G — Sample queries section with the three queries and short interpretations
 
 
