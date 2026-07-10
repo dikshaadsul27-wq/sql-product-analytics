@@ -7,11 +7,7 @@
 
 Row counts:[Row counts](https://github.com/dikshaadsul27-wq/sql-product-analytics/blob/501170d117a298af1cad3c8f9372bb5689905ec4/notes/Row%20counts.md)
 
-## Section C — Foreign Keys
-
-
-
-## Section D — ER Diagram (Mermaid)
+## Section C — ER Diagram (Mermaid)
 
 ```mermaid
 erDiagram
@@ -32,4 +28,13 @@ erDiagram
     attribution_touches }o--o| attribution_campaigns : maps_via_bridge
     attribution_campaigns }o--|| marketing_campaigns : refs
 ```
-## E. Five Things That Surprised Me
+
+## Section D — Column dictionary for key tables
+
+## Section E — Data quality and quirks section
+
+## Section F — Six probe questions answered explicitly
+
+## Section G — Sample queries section with the three queries and short interpretations
+
+
