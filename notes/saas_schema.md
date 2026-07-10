@@ -150,7 +150,6 @@ erDiagram
 2. How is MRR stored / how do I compute it?
 3. What `status` values exist with counts?
 
-<img width="243" height="175" alt="image" src="https://github.com/user-attachments/assets/40adffc1-c708-4a90-ae6d-c7fa0fdfb151" />
 
 4. How do I distinguish trial from paid?
 5. What timezone are timestamps in?
