@@ -1,4 +1,4 @@
-##Part A — ecom (5 queries)
+## Part A — ecom (5 queries)
 
 **Query E1 — Activation Curve: Time-to-First-Meaningful-Action**
 
@@ -61,7 +61,7 @@
 
 *Actionable Takeaways :*
 
-##Part B — saas (5 queries)
+## Part B — saas (5 queries)
 
 **Query S1 — Monthly MRR Movement Decomposition**
 
