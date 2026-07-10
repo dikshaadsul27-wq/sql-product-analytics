@@ -140,6 +140,8 @@ erDiagram
 
 ## Section D — Column dictionary for key tables
 
+[Inventory.md](https://github.com/dikshaadsul27-wq/sql-product-analytics/blob/069d8b032a1a44fcda5202ab2690b90422491584/notes/Inventory.md)
+
 ## Section E — Data quality and quirks section
 
 ## Section F — Six probe questions answered explicitly
