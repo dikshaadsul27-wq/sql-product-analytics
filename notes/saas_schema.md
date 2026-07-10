@@ -115,10 +115,6 @@ Row counts: [Row counts](https://github.com/dikshaadsul27-wq/sql-product-analyti
 
 ## Section C — ER Diagram (Mermaid)
 
-## 🧩 Entity-Relationship Diagram
-
-## 🧩 Balanced Entity-Relationship Diagram
-
 ```mermaid
 erDiagram
     %% Core entities at the center
