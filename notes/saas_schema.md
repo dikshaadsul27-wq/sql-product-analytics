@@ -133,8 +133,9 @@ erDiagram
 
     SUBSCRIPTIONS ||--o{ INVOICES : "generates"
     SUBSCRIPTIONS ||--o{ PAYMENT_ATTEMPTS : "triggers"
-    SUBSCRIPTIONS ||--o{ TRIALS : "converts"
     PLANS ||--o{ SUBSCRIPTIONS : "defines"
+    SUBSCRIPTIONS ||--o{ TRIALS : "converts"
+    
 ```
 
 ## Section D — Column dictionary for key tables
