@@ -115,24 +115,128 @@ Row counts: [Row counts](https://github.com/dikshaadsul27-wq/sql-product-analyti
 
 ## Section C — ER Diagram (Mermaid)
 
+## 🧩 Entity-Relationship Diagram
+
 ```mermaid
 erDiagram
-    customers          ||--o{ orders : places
-    orders             ||--|{ order_items : contains
-    order_items        }o--|| product_variants : ships
-    product_variants   }o--|| products : sku_of
-    products           }o--|| categories : in
-    orders             ||--o{ payment_intents : pays_via
-    payment_intents    ||--o{ payment_transactions : attempts
-    orders             ||--o{ refunds : may_have
-    orders             ||--o{ return_requests : may_return
-    return_requests    ||--|{ return_items : with
-    orders             ||--o{ shipments : ships
-    customers          ||--o{ sessions : starts
-    sessions           ||--o{ session_events : logs
-    sessions           ||--o{ attribution_touches : has
-    attribution_touches }o--o| attribution_campaigns : maps_via_bridge
-    attribution_campaigns }o--|| marketing_campaigns : refs
+    ACCOUNTS {
+        bigint account_id PK
+        text name
+        text account_type
+        text industry
+        integer employee_count
+        text country
+        timestamp signup_date
+        text acquisition_channel
+    }
+
+    USERS {
+        integer user_id PK
+        text email
+        text company_name
+        timestamp signup_date
+        text signup_source
+        text plan_type
+        integer is_active
+        timestamp last_login_date
+        bigint account_id FK
+        text role
+    }
+
+    SUBSCRIPTIONS {
+        integer subscription_id PK
+        integer user_id FK
+        text plan
+        timestamp start_date
+        timestamp end_date
+        numeric mrr
+        text status
+        timestamp cancelled_at
+        text cancellation_reason
+        bigint account_id FK
+        integer seat_count
+        integer plan_id FK
+    }
+
+    PLANS {
+        integer plan_id PK
+        text plan_name
+        numeric monthly_price
+        integer seat_limit
+        text billing_interval
+    }
+
+    INVOICES {
+        integer invoice_id PK
+        integer user_id FK
+        integer subscription_id FK
+        numeric amount
+        text status
+        timestamp issued_date
+        timestamp paid_date
+        timestamp due_date
+        bigint account_id FK
+    }
+
+    PAYMENT_ATTEMPTS {
+        integer attempt_id PK
+        integer invoice_id FK
+        integer user_id FK
+        integer subscription_id FK
+        numeric amount
+        text status
+        text failure_reason
+        integer attempt_number
+        timestamp attempted_at
+        bigint account_id FK
+    }
+
+    SEATS {
+        bigint seat_id PK
+        bigint account_id FK
+        integer user_id FK
+        timestamp activated_at
+        timestamp deactivated_at
+    }
+
+    SUPPORT_TICKETS {
+        bigint ticket_id PK
+        bigint account_id FK
+        integer opened_by_user_id FK
+        timestamp opened_at
+        timestamp closed_at
+        text priority
+        text category
+        integer csat
+    }
+
+    TRIALS {
+        bigint trial_id PK
+        bigint account_id FK
+        timestamp started_at
+        timestamp ends_at
+        timestamp converted_at
+        bigint converted_subscription_id FK
+    }
+
+    ACCOUNTS ||--o{ USERS : "has"
+    ACCOUNTS ||--o{ SUBSCRIPTIONS : "owns"
+    ACCOUNTS ||--o{ INVOICES : "billed"
+    ACCOUNTS ||--o{ PAYMENT_ATTEMPTS : "attempts"
+    ACCOUNTS ||--o{ SEATS : "contains"
+    ACCOUNTS ||--o{ SUPPORT_TICKETS : "raises"
+    ACCOUNTS ||--o{ TRIALS : "initiates"
+
+    USERS ||--o{ SUBSCRIPTIONS : "subscribes"
+    USERS ||--o{ INVOICES : "receives"
+    USERS ||--o{ PAYMENT_ATTEMPTS : "makes"
+    USERS ||--o{ SEATS : "occupies"
+    USERS ||--o{ SUPPORT_TICKETS : "opens"
+
+    SUBSCRIPTIONS ||--o{ INVOICES : "generates"
+    SUBSCRIPTIONS ||--o{ PAYMENT_ATTEMPTS : "triggers"
+    SUBSCRIPTIONS ||--o{ TRIALS : "converts"
+    PLANS ||--o{ SUBSCRIPTIONS : "defines"
 ```
 
 ## Section D — Column dictionary for key tables
