@@ -4,52 +4,52 @@
 (Grain, approx row count, purpose for each table) [Inventory](https://github.com/dikshaadsul27-wq/sql-product-analytics/blob/501170d117a298af1cad3c8f9372bb5689905ec4/notes/Inventory.md)
 
 ### 1. accounts
-- Grain: 
+- Grain: a single account
 - Approx row count: 1,250
-- Purpose:
+- Purpose: a company can have multiple accounts
 
 ### 2. email_sends
-- Grain: 
+- Grain: an email sent out to a user
 - Approx row count: 3,385
 - Purpose:
 
 ### 3. events
-- Grain: 
+- Grain: an event by a user
 - Approx row count: 53,534
 - Purpose:
 
 ### 4. experiment_assignments
-- Grain: 
+- Grain: user invovled in the experiment
 - Approx row count: 3,200
 - Purpose:
 
 ### 5. experiment_variants
-- Grain: 
+- Grain: variant of an experiment
 - Approx row count: 8
 - Purpose:
 
 ### 6. experiments
-- Grain: 
+- Grain: an experiment conducted
 - Approx row count: 4
 - Purpose:
 
 ### 7. features
-- Grain: 
+- Grain: a feature and its details
 - Approx row count: 50
 - Purpose:
 
 ### 8. invoices
-- Grain: 
+- Grain: an invoice for a user
 - Approx row count: 4,201
 - Purpose:
 
 ### 9. legacy_companies
-- Grain: 
+- Grain: a company and its details
 - Approx row count: 200
 - Purpose:
 
 ### 10. legacy_events
-- Grain: 
+- Grain: an event recorded against a company
 - Approx row count: 15,028
 - Purpose:
 
