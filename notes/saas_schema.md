@@ -54,47 +54,47 @@
 - Purpose:
 
 ### 11. legacy_invoices
-- Grain: 
+- Grain: an invoice for a company (instead of a single user)
 - Approx row count: 1,500
 - Purpose:
 
 ### 12. legacy_subscriptions
-- Grain: 
+- Grain: a subscription by a company (instead of a single user)
 - Approx row count: 500
 - Purpose:
 
 ### 13. legacy_support_tickets
-- Grain: 
+- Grain: a ticked opened against a company (instead of a single user)
 - Approx row count: 300
 - Purpose:
 
 ### 14. payment_attempts
-- Grain: 
+- Grain: a payment attempt made (including failed attempts)
 - Approx row count: 5,690
 - Purpose:
 
 ### 15. plans
-- Grain: 
+- Grain: a plan with price and seat limit
 - Approx row count: 8
 - Purpose:
 
 ### 16. seats
-- Grain: 
+- Grain: a user within an account with activated and/or deactivated date
 - Approx row count: 1,556
 - Purpose:
 
 ### 17. subscription_events
-- Grain: 
+- Grain: a event that records change in subscription (start,changed,converted,cancelled,etc)
 - Approx row count: 3,741
 - Purpose:
 
 ### 18. subscriptions
-- Grain: 
+- Grain: a subscription by user and subscription details
 - Approx row count: 2,113
 - Purpose:
 
 ### 19. support_tickets
-- Grain: 
+- Grain: a ticket opened by users
 - Approx row count: 1,249
 - Purpose:
 
@@ -104,7 +104,7 @@
 - Purpose:
 
 ### 21. users
-- Grain: 
+- Grain: a user and their info
 - Approx row count: 2,556
 - Purpose:
 
