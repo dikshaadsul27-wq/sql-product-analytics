@@ -22,7 +22,7 @@ The dashboard consists of below metrics
 ## screenshots/  
 Visual outputs of the SQL analyses:
 
-## INTERPRETATIONS.md
+## Interpretations.md
 
 
 ## case_study.md
