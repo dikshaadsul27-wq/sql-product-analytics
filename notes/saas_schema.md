@@ -117,27 +117,32 @@ Row counts: [Row counts](https://github.com/dikshaadsul27-wq/sql-product-analyti
 
 ## 🧩 Entity-Relationship Diagram
 
+## 🧩 Balanced Entity-Relationship Diagram
+
 ```mermaid
 erDiagram
+    %% Core entities at the center
     ACCOUNTS ||--o{ USERS : "has"
+    ACCOUNTS ||--o{ SEATS : "contains"
     ACCOUNTS ||--o{ SUBSCRIPTIONS : "owns"
     ACCOUNTS ||--o{ INVOICES : "billed"
     ACCOUNTS ||--o{ PAYMENT_ATTEMPTS : "attempts"
-    ACCOUNTS ||--o{ SEATS : "contains"
     ACCOUNTS ||--o{ SUPPORT_TICKETS : "raises"
     ACCOUNTS ||--o{ TRIALS : "initiates"
 
+    %% User relationships grouped together
+    USERS ||--o{ SEATS : "occupies"
     USERS ||--o{ SUBSCRIPTIONS : "subscribes"
     USERS ||--o{ INVOICES : "receives"
     USERS ||--o{ PAYMENT_ATTEMPTS : "makes"
-    USERS ||--o{ SEATS : "occupies"
     USERS ||--o{ SUPPORT_TICKETS : "opens"
 
+    %% Subscription and billing flow
+    PLANS ||--o{ SUBSCRIPTIONS : "defines"
     SUBSCRIPTIONS ||--o{ INVOICES : "generates"
     SUBSCRIPTIONS ||--o{ PAYMENT_ATTEMPTS : "triggers"
     SUBSCRIPTIONS ||--o{ TRIALS : "converts"
-    PLANS ||--o{ SUBSCRIPTIONS : "defines"
-```
+
 
 ## Section D — Column dictionary for key tables
 
