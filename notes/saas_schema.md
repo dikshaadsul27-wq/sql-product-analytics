@@ -147,6 +147,7 @@ erDiagram
 ## Section F — Six probe questions answered explicitly
 
 1. What is the grain of `subscriptions`?
+
 Self‑serve accounts → user‑grain
 - Each row represents one user’s subscription period.
 - user_id is populated, seat_count = 1.
