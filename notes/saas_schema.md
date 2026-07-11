@@ -89,7 +89,7 @@
 - Purpose:
 
 ### 18. subscriptions
-- Grain: a subscription by user and subscription details
+- Grain: a subscription by user/account and subscription details
 - Approx row count: 2,113
 - Purpose:
 
