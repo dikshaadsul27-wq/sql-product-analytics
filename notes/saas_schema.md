@@ -159,6 +159,21 @@ B2B accounts → account‑grain
 - If the account churns and resubscribes, you’ll see two rows (one per subscription period, at the account level).
 
 2. How is MRR stored / how do I compute it?
+
+MRR is derived from plan price × seat count, adjusted for billing interval:
+
+MRR=monthly_price×seat_count
+
+Self‑serve accounts:
+- seat_count = 1
+- user_id is set
+- MRR = plan’s monthly price
+
+B2B accounts:
+- seat_count can be dozens
+- user_id is NULL
+- MRR = plan’s monthly price × seat_count
+
 3. What `status` values exist with counts?
 
 
