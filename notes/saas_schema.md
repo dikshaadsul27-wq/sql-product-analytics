@@ -147,6 +147,16 @@ erDiagram
 ## Section F — Six probe questions answered explicitly
 
 1. What is the grain of `subscriptions`?
+Self‑serve accounts → user‑grain
+- Each row represents one user’s subscription period.
+- user_id is populated, seat_count = 1.
+- If a user churns and later resubscribes, you’ll see two rows (one per subscription period).
+
+B2B accounts → account‑grain
+- Each row represents one account’s subscription period.
+- user_id is NULL, seat_count can be dozens.
+- If the account churns and resubscribes, you’ll see two rows (one per subscription period, at the account level).
+
 2. How is MRR stored / how do I compute it?
 3. What `status` values exist with counts?
 
