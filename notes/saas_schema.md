@@ -152,11 +152,12 @@ Self‑serve accounts → user‑grain
 - Each row represents one user’s subscription period.
 - user_id is populated, seat_count = 1.
 - If a user churns and later resubscribes, you’ll see two rows (one per subscription period).
+- a single user could have multiple plans.
 
 B2B accounts → account‑grain
 - Each row represents one account’s subscription period.
 - user_id is NULL, seat_count can be dozens.
-- If the account churns and resubscribes, you’ll see two rows (one per subscription period, at the account level).
+- If the account churns and resubscribes, you’ll see the same row with updated status.
 
 2. How is MRR stored / how do I compute it?
 
@@ -176,10 +177,13 @@ B2B accounts:
 
 3. What `status` values exist with counts?
 
+<img width="193" height="175" alt="image" src="https://github.com/user-attachments/assets/6c41330f-45d5-4972-acc7-8ae614b41e54" />
 
-4. How do I distinguish trial from paid?
-5. What timezone are timestamps in?
-6. Is there a soft-delete pattern?
+4. How do I distinguish trial from paid? subscriptions.mrr:
+
+
+6. What timezone are timestamps in?
+7. Is there a soft-delete pattern?
 
 ## Section G — Sample queries section with the three queries and short interpretations
 
