@@ -6,107 +6,107 @@
 ### 1. accounts
 - Grain: a single account
 - Approx row count: 1,250
-- Purpose: a company can have multiple accounts
+- Purpose: Master record of customer accounts. A company can have multiple accounts
 
 ### 2. email_sends
 - Grain: an email sent out to a user
 - Approx row count: 3,385
-- Purpose:
+- Purpose: Tracks marketing and transactional emails sent to users, useful for engagement and campaign analysis.
 
 ### 3. events
 - Grain: an event by a user
 - Approx row count: 53,534
-- Purpose:
+- Purpose: Logs product usage events (feature clicks, actions).
 
 ### 4. experiment_assignments
 - Grain: user invovled in the experiment
 - Approx row count: 3,200
-- Purpose:
+- Purpose: Records which users were assigned to which experiments, enabling A/B test analysis.
 
 ### 5. experiment_variants
 - Grain: variant of an experiment
 - Approx row count: 8
-- Purpose:
+- Purpose: Defines the possible variants for experiments.
 
 ### 6. experiments
 - Grain: an experiment conducted
 - Approx row count: 4
-- Purpose:
+- Purpose: Metadata for experiments (name, start/end dates, description).
 
 ### 7. features
 - Grain: a feature and its details
 - Approx row count: 50
-- Purpose:
+- Purpose: Catalog of product features, used to join with events for feature adoption analysis.
 
 ### 8. invoices
 - Grain: an invoice for a user
 - Approx row count: 4,201
-- Purpose:
+- Purpose: Billing records tied to subscriptions, used for revenue recognition and payment reconciliation.
 
 ### 9. legacy_companies
 - Grain: a company and its details
 - Approx row count: 200
-- Purpose:
+- Purpose: Historical company records from the legacy system, kept for migration and backfill.
 
 ### 10. legacy_events
 - Grain: an event recorded against a company
 - Approx row count: 15,028
-- Purpose:
+- Purpose: Historical usage events tied to companies in the legacy system.
 
 ### 11. legacy_invoices
 - Grain: an invoice for a company (instead of a single user)
 - Approx row count: 1,500
-- Purpose:
+- Purpose:  Historical invoices from the legacy system, account‑level billing.
 
 ### 12. legacy_subscriptions
 - Grain: a subscription by a company (instead of a single user)
 - Approx row count: 500
-- Purpose:
+- Purpose: Historical subscription records from the legacy system.
 
 ### 13. legacy_support_tickets
 - Grain: a ticked opened against a company (instead of a single user)
 - Approx row count: 300
-- Purpose:
+- Purpose: Historical support tickets from the legacy system.
 
 ### 14. payment_attempts
 - Grain: a payment attempt made (including failed attempts)
 - Approx row count: 5,690
-- Purpose:
+- Purpose: Tracks successful and failed payment attempts, critical for dunning and churn prevention.
 
 ### 15. plans
 - Grain: a plan with price and seat limit
 - Approx row count: 8
-- Purpose:
+- Purpose: Defines subscription plans (starter, pro, enterprise), with pricing and seat rules.
 
 ### 16. seats
 - Grain: a user within an account with activated and/or deactivated date
 - Approx row count: 1,556
-- Purpose:
+- Purpose: Tracks seat assignments in B2B accounts, used to measure active seat usage.
 
 ### 17. subscription_events
 - Grain: a event that records change in subscription (start,changed,converted,cancelled,etc)
 - Approx row count: 3,741
-- Purpose:
+- Purpose: Lifecycle log of subscription changes, used for churn, upgrades, downgrades analysis.
 
 ### 18. subscriptions
 - Grain: a subscription by user/account and subscription details
 - Approx row count: 2,113
-- Purpose:
+- Purpose: Core subscription records (status, plan, MRR), basis for revenue and churn metrics.
 
 ### 19. support_tickets
 - Grain: a ticket opened by users
 - Approx row count: 1,249
-- Purpose:
+- Purpose: Tracks customer support interactions at the user level.
 
 ### 20. trials
-- Grain: 
+- Grain: a trial period for a user/account
 - Approx row count: 250
-- Purpose:
+- Purpose: Records free trial activations, used to measure conversion to paid subscriptions.
 
 ### 21. users
 - Grain: a user and their info
 - Approx row count: 2,556
-- Purpose:
+- Purpose: Master record of individual users, linked to accounts, subscriptions, events, and experiments.
 
 
 ## Section B — Column Dictionary
