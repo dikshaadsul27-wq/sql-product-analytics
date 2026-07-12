@@ -255,4 +255,16 @@ Output:
 
 ### 3. "Show 10 sample subscription_events in chronological order."
 
+Query: SELECT se.event_id,
+       se.subscription_id,
+       se.account_id,
+       se.event_type,
+       se.event_time AS event_time_utc,
+       se.event_time AT TIME ZONE 'UTC' AT TIME ZONE 'Asia/Kolkata' AS event_time_ist
+FROM saas.subscription_events se
+ORDER BY se.event_time ASC
+LIMIT 10;
 
+Output: 
+
+<img width="1254" height="320" alt="image" src="https://github.com/user-attachments/assets/4d10f70c-2fdf-4fe6-9fc0-4a7e3286cde5" />
