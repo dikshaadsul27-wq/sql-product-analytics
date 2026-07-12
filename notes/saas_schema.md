@@ -140,7 +140,7 @@ erDiagram
 
 ## Section D — Column dictionary for key tables
 
-<img width="957" height="1422" alt="image" src="https://github.com/user-attachments/assets/050dd86b-14a3-4e62-8e06-075e734ffbca" />
+<img width="791" height="1422" alt="image" src="https://github.com/user-attachments/assets/12c8f7dd-50c6-4971-b940-f8c5f8156bba" />
 
 ## Section E — Data quality and quirks section
 
