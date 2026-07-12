@@ -146,7 +146,7 @@ erDiagram
 
 ## Section F — Six probe questions answered explicitly
 
-1. What is the grain of `subscriptions`?
+### 1. What is the grain of `subscriptions`?
 
 Self‑serve accounts → user‑grain
 - Each row represents one user’s subscription period.
@@ -159,7 +159,7 @@ B2B accounts → account‑grain
 - user_id is NULL, seat_count can be dozens.
 - If the account churns and resubscribes, you’ll see the same row with updated status.
 
-2. How is MRR stored / how do I compute it?
+### 2. How is MRR stored / how do I compute it?
 
 MRR is derived from plan price × seat count, adjusted for billing interval:
 
@@ -175,11 +175,11 @@ B2B accounts:
 - user_id is NULL
 - MRR = plan’s monthly price × seat_count
 
-3. What `status` values exist with counts?
+### 3. What `status` values exist with counts?
 
 <img width="193" height="175" alt="image" src="https://github.com/user-attachments/assets/6c41330f-45d5-4972-acc7-8ae614b41e54" />
 
-4. How do I distinguish trial from paid?
+### 4. How do I distinguish trial from paid?
 
 Combined together subscriptions, trials and plans table.The subscriptions.mrr field alone is not enough because free plans can show mrr = 0 even when status = 'active'.
 To distinguish apply below filters:
@@ -193,11 +193,11 @@ Paid if:
 - mrr > 0, AND
 - p.monthly_price > 0.
 
-5. What timezone are timestamps in?
+### 5. What timezone are timestamps in?
 
 Both subscriptions.start_date and subscription_events.event_time are stored as timestamp without time zone, conventionally in UTC. They are not IST unless you explicitly convert them
 
-6. Is there a soft-delete pattern?
+### 6. Is there a soft-delete pattern?
 
 None of the tables have a deleted_at column. That means there is no need to add deleted_at IS NULL filters in queries.
 But need to filter by status to avoid double‑counting churned, paused, or free subscriptions when calculating metrics like MRR or active users.
