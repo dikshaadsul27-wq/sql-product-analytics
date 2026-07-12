@@ -236,6 +236,32 @@ But need to filter by status to avoid double‑counting churned, paused, or free
 
 ### 1. "How many active paying accounts are there right now?" (remember to normalize `LOWER(plan)`)
 
+Query: with active_self_serve as (
+    select distinct s.user_id, s.subscription_id
+    from saas.subscriptions s
+    join saas.accounts a on s.account_id = a.account_id
+    where s.status = 'active'
+      and s.mrr > 0
+      and a.account_type = 'self_serve'
+),
+active_b2b as (
+    select distinct s.account_id, s.subscription_id
+    from saas.subscriptions s
+    join saas.accounts a on s.account_id = a.account_id
+    where s.status = 'active'
+      and s.mrr > 0
+      and a.account_type = 'b2b'
+)
+select 
+    (select count(*) from active_self_serve) as active_self_serve_subscriptions,
+    (select count(*) from active_b2b) as active_b2b_subscriptions,
+    (select count(*) from active_self_serve) 
+      + (select count(*) from active_b2b) as total_active_subscriptions;
+
+Output: 
+
+<img width="784" height="59" alt="image" src="https://github.com/user-attachments/assets/34a22a94-4748-4e9e-8c55-4bc5869e8caa" />
+
 
 ### 2. "What's the breakdown of accounts by plan?" (collapse case drift)
 
