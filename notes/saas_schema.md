@@ -239,15 +239,15 @@ But need to filter by status to avoid double‑counting churned, paused, or free
 
 ### 2. "What's the breakdown of accounts by plan?" (collapse case drift)
 
-Query: SELECT LOWER(p.plan_name) AS plan
-       COUNT(DISTINCT a.account_id) AS account_count
-FROM saas.subscriptions s
-JOIN saas.accounts a ON s.account_id = a.account_id
-JOIN saas.plans p ON s.plan_id = p.plan_id
-WHERE s.status = 'active'
-  AND s.mrr > 0
-GROUP BY LOWER(p.plan_name)
-ORDER BY account_count DESC;
+Query: select lower(p.plan_name) as plan,
+       count(distinct a.account_id) as account_count
+from saas.subscriptions s
+join saas.accounts a on s.account_id = a.account_id
+join saas.plans p on s.plan_id = p.plan_id
+where s.status = 'active'
+  and s.mrr > 0
+group by lower(p.plan_name)
+order by account_count desc;
 
 Output: 
 
@@ -255,15 +255,16 @@ Output:
 
 ### 3. "Show 10 sample subscription_events in chronological order."
 
-Query: SELECT se.event_id,
+Query: select se.event_id,
        se.subscription_id,
        se.account_id,
        se.event_type,
-       se.event_time AS event_time_utc,
-       se.event_time AT TIME ZONE 'UTC' AT TIME ZONE 'Asia/Kolkata' AS event_time_ist
-FROM saas.subscription_events se
-ORDER BY se.event_time ASC
-LIMIT 10;
+       se.event_time as event_time_utc,
+       se.event_time at time zone 'utc' at time zone 'asia/kolkata' as event_time_ist
+from saas.subscription_events se
+order by se.event_time asc
+limit 10;
+
 
 Output: 
 
