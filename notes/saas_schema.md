@@ -144,6 +144,36 @@ erDiagram
 
 ## Section E — Data quality and quirks section
 
+### 1. Plan name case drift
+
+In subscriptions.plan, values appear in inconsistent casing: "pro", "Pro", "professional", "Enterprise", "enterprise".
+This creates duplicate categories when grouping by plan.
+Fix: Normalize plan names to lowercase or join on plans.plan_id instead of free‑text.
+
+### 2. NULL cancellation_reason on churned subscriptions (~31%)
+
+Many rows with status = 'churned' have cancellation_reason IS NULL.
+This limits churn analysis (can’t distinguish “too_expensive” vs “switched_competitor”).
+Fix: Enforce reason capture at cancellation or backfill with “unspecified.”
+
+### 3. NULL plan_id on subscriptions (~9%)
+
+About 9% of subscriptions rows have plan_id IS NULL.
+This breaks joins to plans and makes MRR validation unreliable.
+Fix: Audit ETL pipeline to ensure every subscription maps to a valid plan_id.
+
+### 4.Orphan user_id rows in events (~40)
+
+In events, ~40 rows reference user_id values that don’t exist in users.
+These are orphaned events, likely due to deleted or failed signups.
+Fix: Add foreign key enforcement or clean up orphan rows.
+
+### 5.Future‑dated subscription_events (~234 rows)
+
+In subscription_events.event_time, ~234 rows have timestamps later than “today.”
+These are invalid for cohort analysis and retention math.
+Fix: Filter out future‑dated events or correct ETL timestamp logic.
+
 ## Section F — Six probe questions answered explicitly
 
 ### 1. What is the grain of `subscriptions`?
