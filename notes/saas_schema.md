@@ -179,11 +179,28 @@ B2B accounts:
 
 <img width="193" height="175" alt="image" src="https://github.com/user-attachments/assets/6c41330f-45d5-4972-acc7-8ae614b41e54" />
 
-4. How do I distinguish trial from paid? subscriptions.mrr:
+4. How do I distinguish trial from paid?
 
+Combined together subscriptions, trials and plans table.The subscriptions.mrr field alone is not enough because free plans can show mrr = 0 even when status = 'active'.
+To distinguish apply below filters:
+Trial if:
+- s.status = 'trialing', OR
+- p.monthly_price = 0, OR
+- t.converted_at IS NULL and trial period not ended.
 
-6. What timezone are timestamps in?
-7. Is there a soft-delete pattern?
+Paid if:
+- s.status = 'active' or past_due, AND
+- mrr > 0, AND
+- p.monthly_price > 0.
+
+5. What timezone are timestamps in?
+
+Both subscriptions.start_date and subscription_events.event_time are stored as timestamp without time zone, conventionally in UTC. They are not IST unless you explicitly convert them
+
+6. Is there a soft-delete pattern?
+
+None of the tables have a deleted_at column. That means there is no need to add deleted_at IS NULL filters in queries.
+But need to filter by status to avoid double‑counting churned, paused, or free subscriptions when calculating metrics like MRR or active users.
 
 ## Section G — Sample queries section with the three queries and short interpretations
 
