@@ -234,4 +234,25 @@ But need to filter by status to avoid double‑counting churned, paused, or free
 
 ## Section G — Sample queries section with the three queries and short interpretations
 
+### 1. "How many active paying accounts are there right now?" (remember to normalize `LOWER(plan)`)
+
+
+### 2. "What's the breakdown of accounts by plan?" (collapse case drift)
+
+Query: SELECT LOWER(p.plan_name) AS plan
+       COUNT(DISTINCT a.account_id) AS account_count
+FROM saas.subscriptions s
+JOIN saas.accounts a ON s.account_id = a.account_id
+JOIN saas.plans p ON s.plan_id = p.plan_id
+WHERE s.status = 'active'
+  AND s.mrr > 0
+GROUP BY LOWER(p.plan_name)
+ORDER BY account_count DESC;
+
+Output: 
+
+<img width="430" height="117" alt="image" src="https://github.com/user-attachments/assets/320a90a8-8a05-48b5-97cd-0ddfc6fa0c34" />
+
+### 3. "Show 10 sample subscription_events in chronological order."
+
 
