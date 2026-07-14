@@ -24,13 +24,18 @@ This strongly indicates a data quality issue. In most cases, first_action_time v
 
 *Business question:* "Where is checkout leaking, and is the leak the same across paid social vs organic search?"
 
-*Summary of the Output :*
+*Summary of the Output :* Across all entry channels, the checkout funnel shows relatively small leaks at each intermediate step (3–4% at address, ~2% at shipping, ~1–2% at payment). The largest drop consistently occurs at the final purchase step, where 7–8% of sessions abandon after adding payment details. Organic and paid channels have similar patterns, with referral and affiliate slightly worse at the final step (~8.3–8.2% drop).
 
 *Sanity checks :*  
+1. Each later step count is ≤ the prior step, so the funnel logic is correct.
+2. Drop percentages are consistent across channels, no impossible >100% conversions.
 
-*Interpretation :*  
+*Interpretation :*  The funnel is relatively healthy through address, shipping, and payment stages — losses are modest. The critical leak is at the final purchase step, where ~8% of users abandon after entering payment details. This pattern is consistent across all channels (organic, paid, referral, email, affiliate), suggesting the issue is not channel‑specific but rather something in the purchase confirmation or payment processing experience. Referral and affiliate traffic show slightly higher drop‑offs, which may reflect lower trust or weaker intent compared to direct/organic traffic.
 
 *Actionable Takeaways :*
+1. Investigate the purchase confirmation step (post‑payment) with session recordings and heatmaps in the next sprint. Focus on whether users encounter friction, errors, or trust issues after submitting payment.
+2. Validate payment gateway performance — check for latency, failed transactions, or confusing error messages.
+3. Run usability testing on the final confirmation page to identify design or UX issues that could cause hesitation.
 
 **Query E3 — Cohort Retention Curve (Weekly, Behavioral)**
 
