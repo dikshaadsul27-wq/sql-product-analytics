@@ -4,13 +4,20 @@
 
 *Business question:* "How fast do new signups become real users, and how has that changed cohort-over-cohort?"
 
-*Summary of the Output :*
+*Summary of the Output :* Cohort sizes range from ~129 in the earliest week to ~800 in later weeks. Activation rates decline steadily: from ~16% in the first instrumented cohort down to ~2% in the most recent one. Median minutes to activation drop from ~27k minutes (~19 days) in early cohorts to ~2.9k minutes (~2 days) in the latest cohort. p90 minutes to activation also shrink from ~70k minutes (~48 days) to ~6.4k minutes (~4.5 days). Overall, activation is happening faster (lower median/p90), but fewer users are activating at all (falling activation rate).
 
 *Sanity checks :*  
+1. activated_7d <= cohort_size holds true for every row.
+2. Cohorts before 2026‑04‑19 are excluded, so no uninstrumented rows are present.
+3. The most recent cohort show artificiallys low activation rate because the 7‑day window hasn’t fully closed, this explains the very low 1.99% rate
 
-*Interpretation :*  
+*Interpretation :* There is a clear decline in activation rates across cohorts. On average, only about 8% of users take meaningful actions such as add_to_cart, begin_checkout, or purchase within 7 days of signup. However, a deeper look at the data reveals a significant anomaly: approximately 63% of users have a first action logged before their signup date. When those cases are excluded, roughly 50% of users still perform these actions either 7 days before or after the signup.
+This strongly indicates a data quality issue. In most cases, first_action_time values precede signup_time by more than a month, which rules out simple timezone differences. A plausible explanation is that some events were backfilled or imported with incorrect timestamps during data ingestion, leading to misaligned timelines.
 
 *Actionable Takeaways :*
+1. Validate how session_events.occurred_at is being ingested. Check whether historical events were backfilled with incorrect timestamps or mismatched signup IDs.
+2. Add automated sanity checks (e.g., first_action_time >= signup_time) to flag future anomalies early, before they distort cohort analysis.
+3. After cleaning, recompute activation rates and time‑to‑activation. Compare the corrected results to the current output to quantify the impact of bad data.
 
 
 **Query E2 — Checkout Funnel Drop-off by Entry Channel**
