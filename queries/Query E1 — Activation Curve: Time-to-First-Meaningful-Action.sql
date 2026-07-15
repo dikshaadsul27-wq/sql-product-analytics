@@ -5,17 +5,20 @@
 -- Sanity check: [what you ran to verify this isn't lying to you] -> [the actual result]
 
 with signup_cohorts as (
-    select 
+ select 
         c.customer_id,
-        date_trunc('week', c.created_at) at time zone 'utc' as signup_week,
-        c.created_at at time zone 'utc' as signup_time
+        least(min(se.occurred_at),c.created_at) as signup_time,
+		date_trunc('week',least(min(se.occurred_at),c.created_at)) as signup_week
     from ecom.customers c
+	left join ecom.session_events se
+    on c.customer_id = se.customer_id
     where c.created_at >= '2026-04-19' -- exclude uninstrumented cohorts
+	group by c.customer_id
 ),
 first_actions as (
     select 
         se.customer_id,
-        min(se.occurred_at) at time zone 'utc' as first_action_time
+        min(se.occurred_at) as first_action_time
     from ecom.session_events se
     where se.event_type in ('add_to_cart','begin_checkout','purchase')
     group by se.customer_id
@@ -26,16 +29,10 @@ activation as (
         sc.customer_id,
         case 
             when fa.first_action_time is not null
-			 and fa.first_action_time > sc.signup_time
              and fa.first_action_time <= sc.signup_time + interval '7 days'
             then 1 else 0 
         end as activated_7d,
-        case
-    		when fa.first_action_time > sc.signup_time
-    		then extract(epoch from (fa.first_action_time - sc.signup_time))/60
-    		else null
-		end as minutes_to_activation
-
+    	extract(epoch from (fa.first_action_time - sc.signup_time))/60 as minutes_to_activation
     from signup_cohorts sc
     left join first_actions fa on sc.customer_id = fa.customer_id
 )
@@ -49,4 +46,5 @@ select
 from activation
 group by signup_week
 order by signup_week;
+
 
