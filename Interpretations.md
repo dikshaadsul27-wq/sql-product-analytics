@@ -77,13 +77,21 @@ Wearables (smartwatch, hybrid watch) → high interest but low ATC → potential
 
 *Business question:* "Cart abandonment is 70% overall — but is it the same for ₹500 carts as ₹15,000 carts? Where do we lose the most rupees?"
 
-*Summary of the Output :*
+*Summary of the Output :*Overall abandonment rate is ~70%, but varies sharply by cart value. High‑value carts (₹15,000+ and ₹5,000–₹14,999) have low abandonment rates (12–20%), yet account for the largest GMV losses (₹866M and ₹624M left on table). Low‑value carts (<₹500) show the highest abandonment rate (53%), but GMV loss is negligible (~₹2.8M). Mid‑range carts (₹500–₹4,999) have moderate abandonment (31–45%) with meaningful GMV leakage (~₹218M combined).
 
 *Sanity checks :*  
+1. Sum of atc_sessions across buckets equals total ATC sessions in the same window.
 
 *Interpretation :*  
+High‑value carts: Even small abandonment percentages translate into massive rupee losses. Checkout reliability or payment friction disproportionately hurts revenue here.
+Low‑value carts: High abandonment rates, but low GMV impact. Likely driven by shipping cost sensitivity or lack of perceived value.
+Mid‑range carts: Significant abandonment (31–45%), contributing ~₹218M GMV loss. These users are engaged but hesitant—possibly due to pricing thresholds or promotions.
+Strategic insight: GMV leakage is concentrated in top two buckets (₹5,000+), not in low‑value carts.
 
 *Actionable Takeaways :*
+1. Focus engineering and UX fixes on payment flows, error handling, and reliability. Even a 2–3% improvement in high‑value cart conversion yields hundreds of millions in GMV recovery.
+2. For <₹500 carts, experiment with free‑shipping promotions or bundling incentives.
+3. Target ₹500–₹4,999 carts with discount nudges, limited‑time offers, or loyalty points.
 
 ## Part B — saas (5 queries)
 
