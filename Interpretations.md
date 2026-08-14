@@ -55,13 +55,23 @@
 
 *Business question:* "Which products attract eyeballs but don't get added to cart? Those are either pricing problems, image problems, or stock problems."
 
-*Summary of the Output :*
+*Summary of the Output :* The query highlights 10 products that attract significant views but underperform in add‑to‑cart conversions. Each product’s ATC rate is benchmarked against its category median, ensuring context‑sensitive evaluation. Categories include beauty (kajal, eyeshadow, crop top), fashion (jeans, jackets, windcheater), home (bedsheet, French press), and wearables (smartwatch, hybrid watch). Several products show negative gaps vs. category median, flagging them as potential problem SKUs.
 
 *Sanity checks :*  
+1. add_to_cart_sessions <= views for every product
+2. atc_rate between 0 and 1.
 
 *Interpretation :*  
+Beauty SKUs (kajal, eyeshadow) → high visibility but lagging ATC vs. median → possible pricing or image quality issues.
+Fashion SKUs (jeans, jackets, windcheater) → strong views but weak conversion → likely fit/size confidence gap or stock availability.
+Home goods (bedsheet, French press) → lower ATC relative to median → could be price anchoring or competitive alternatives.
+Wearables (smartwatch, hybrid watch) → high interest but low ATC → potential feature mismatch or stock constraints.
 
 *Actionable Takeaways :*
+1. Where ATC gap vs. median is large, consider discounts or bundles.
+2. Audit product detail pages for visual quality, lifestyle imagery, and clarity.
+3. If stockouts or limited sizes exist, ATC suppression is expected. Verify inventory levels for flagged SKUs.
+4. Run competitive pricing analysis for beauty and fashion SKUs.
 
 **Query E5 — Cart Abandonment by Cart Value Bucket**
 
