@@ -4,20 +4,18 @@
 
 *Business question:* "How fast do new signups become real users, and how has that changed cohort-over-cohort?"
 
-*Summary of the Output :* Cohort sizes range from ~129 in the earliest week to ~800 in later weeks. Activation rates decline steadily: from ~16% in the first instrumented cohort down to ~2% in the most recent one. Median minutes to activation drop from ~27k minutes (~19 days) in early cohorts to ~2.9k minutes (~2 days) in the latest cohort. p90 minutes to activation also shrink from ~70k minutes (~48 days) to ~6.4k minutes (~4.5 days). Overall, activation is happening faster (lower median/p90), but fewer users are activating at all (falling activation rate).
+*Summary of the Output :* Activation is trending down across post-instrumentation cohorts: from 47.43% on April 20 to 30.22% on May 25 and 25.0% on June 1. Median time to first meaningful action is also inconsistent and often slow, indicating many users do not activate soon after signup.
 
 *Sanity checks :*  
 1. activated_7d <= cohort_size holds true for every row.
 2. Cohorts before 2026‑04‑19 are excluded, so no uninstrumented rows are present.
-3. The most recent cohort show artificiallys low activation rate because the 7‑day window hasn’t fully closed, this explains the very low 1.99% rate
+3. The most recent cohort show artificially low activation rate because the 7‑day window hasn’t fully closed, this explains the very low 1.99% rate
 
-*Interpretation :* There is a clear decline in activation rates across cohorts. On average, only about 8% of users take meaningful actions such as add_to_cart, begin_checkout, or purchase within 7 days of signup. However, a deeper look at the data reveals a significant anomaly: approximately 63% of users have a first action logged before their signup date. When those cases are excluded, roughly 50% of users still perform these actions either 7 days before or after the signup.
-This strongly indicates a data quality issue. In most cases, first_action_time values precede signup_time by more than a month, which rules out simple timezone differences. A plausible explanation is that some events were backfilled or imported with incorrect timestamps during data ingestion, leading to misaligned timelines.
+*Interpretation :* Among valid post-instrumentation cohorts, activation is worsening cohort-over-cohort: fewer new users complete an add-to-cart, checkout, or purchase within seven days. The May 25 and June 1 cohorts are the key concern, though the most recent cohorts may still be artificially low until their 7-day windows close. The high and variable time-to-activation figures also suggest many users who do activate are taking longer to reach meaningful value.
 
 *Actionable Takeaways :*
-1. Validate how session_events.occurred_at is being ingested. Check whether historical events were backfilled with incorrect timestamps or mismatched signup IDs.
-2. Add automated sanity checks (e.g., first_action_time >= signup_time) to flag future anomalies early, before they distort cohort analysis.
-3. After cleaning, recompute activation rates and time‑to‑activation. Compare the corrected results to the current output to quantify the impact of bad data.
+1. Investigate whether an onboarding change, homepage performance issue, or lower-intent paid traffic around the May 25 signup week caused the activation decline.
+2. Compare funnel conversion, traffic source, onboarding version, and page-load performance against earlier cohorts.
 
 
 **Query E2 — Checkout Funnel Drop-off by Entry Channel**
@@ -34,20 +32,24 @@ This strongly indicates a data quality issue. In most cases, first_action_time v
 
 *Actionable Takeaways :*
 1. Investigate the purchase confirmation step (post‑payment) with session recordings and heatmaps in the next sprint. Focus on whether users encounter friction, errors, or trust issues after submitting payment.
-2. Validate payment gateway performance — check for latency, failed transactions, or confusing error messages.
+2. Validate payment gateway performance: check for latency, failed transactions, or confusing error messages.
 3. Run usability testing on the final confirmation page to identify design or UX issues that could cause hesitation.
 
 **Query E3 — Cohort Retention Curve (Weekly, Behavioral)**
 
 *Business question:* "Of users who signed up in week W, what fraction came back and did *something meaningful* in week W+1, W+2, W+3, W+4?"
 
-*Summary of the Output :*
+*Summary of the Output :* Early cohorts (April 13 – May 11) show steady engagement, with retention rates between 30–40% through week 4. Later cohorts (after May 18) show sharp drop‑offs, with week‑4 retention falling to 0–15%. Cohort sizes also shrink over time, suggesting reduced acquisition or incomplete instrumentation for newer weeks.
 
 *Sanity checks :*  
 
-*Interpretation :*  
+*Interpretation :*  Most cohorts have w1 ≈ 30–35%, comfortably above the 20% threshold. Activation is not the bottleneck. Retention declines from ~40% in early cohorts to near 0% in later ones—indicating users fail to form sustained habits. Engagement decays faster in newer cohorts, implying either product fatigue, reduced onboarding quality, or external seasonality. Fewer signups post‑May 18 may distort later retention rates (small sample volatility).
 
 *Actionable Takeaways :*
+1. Introduce re‑engagement nudges (email/push reminders) around week 2–3.
+2. Add habit‑loop features—saved carts, wish lists, or personalized recommendations—to encourage repeat meaningful actions.
+3. Segment by acquisition channel to identify weak sources (organic vs paid vs referral).
+4. Consider win‑back campaigns for users inactive after week 2.
 
 **Query E4 — PDP Engagement: High-View, Low-Cart Products**
 
