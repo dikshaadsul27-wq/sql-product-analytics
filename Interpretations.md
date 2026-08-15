@@ -99,25 +99,46 @@ Strategic insight: GMV leakage is concentrated in top two buckets (₹5,000+), n
 
 *Business question:* "How did MRR change last month — and what drove the change? New, expansion, contraction, or churn?"
 
-*Summary of the Output :*
+*Summary of the Output :* Most months show positive net new MRR, driven primarily by new subscriptions and reactivations. Churn spikes in Jan, Mar, and May 2026, dragging down net growth despite strong new sales. June 2026 is an outlier, very low new MRR (~₹3k) and net new (~₹2.9k), due to incomplete data capture.
 
 *Sanity checks :*  
 
-*Interpretation :*  
+*Interpretation :* 
+New MRR is consistently the largest contributor (e.g., Oct 2025 ₹22.6k, May 2026 ₹24.1k).
+Reactivation MRR provides meaningful boosts (Jan 2026 ₹4.1k, Apr 2026 ₹3.4k).
+Expansion MRR is steady but modest (~₹1.3k–₹3.7k monthly).
+Jan 2026 (₹9.5k), Mar 2026 (₹13.8k), May 2026 (₹7.6k). These months show strong new sales but churn erodes gains. Contraction MRR is relatively small.
+March 2026 churn (₹13.8k) is the single biggest negative swing, dwarfing contraction and expansion.
 
 *Actionable Takeaways :*
+1. Investigate March 2026 churn spike — largest negative mover, cut by plan tier first.
+2. Address churn volatility — strengthen customer success outreach and retention programs.
+3. Run win‑back campaigns — target accounts that churned in Jan–Mar.
+4. Boost expansion MRR — upsell campaigns, seat bundles, add‑ons to lift growth.
+5. Board narrative — growth strong but churn volatility is the biggest risk, next step is cohort analysis by plan tier.
 
 **Query S2 — Trial-to-Paid Conversion by Cohort**
 
 *Business question:* "Of accounts that started a trial in week W, what fraction converted to paid by day 14, 30, 60?"
 
-*Summary of the Output :*
+*Summary of the Output :* 
+Cohorts are small (1–8 trials per week), so conversion rates swing sharply. Many cohorts show 100% conversion. Several cohorts show 0% conversion. Median days to convert cluster around 9–14 days, consistent with early‑stage adoption.
 
 *Sanity checks :*  
+1. converted_by_14d <= converted_by_30d <= converted_by_60d.
+2. 
 
 *Interpretation :*  
+Weeks like April 14, 2026 (4/4 converted, 100%) and May 25, 2027 (5/6 converted, 83%) show excellent trial‑to‑paid performance.
+Weeks with 0% conversion (e.g. May 12 2026, May 19 2026, May 26 2026, September 29 2026, February 9 2027, March 2 2027) are the worst performers.
+Most conversions happen within ~10–12 days, showing that users decide early whether to pay.
+Conversion is highly inconsistent, some weeks stellar, others completely flat. This points to external factors (marketing quality, signup source) rather than product quality alone.
 
 *Actionable Takeaways :*
+1. Check if these trials came from a weak marketing channel (e.g. low‑intent campaigns).
+2. If source looks fine, pivot to plan trialed maybe a specific plan is failing to convert.
+3. Segment poor cohorts by channel to isolate marketing vs. product problem.
+4. Run targeted experiments on weak sources
 
 **Query S3 — Gross Revenue Churn and Net Revenue Retention by Cohort**
 
