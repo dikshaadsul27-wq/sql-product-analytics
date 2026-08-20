@@ -144,34 +144,56 @@ Conversion is highly inconsistent, some weeks stellar, others completely flat. T
 
 *Business question:* "Of the MRR we had from a given monthly cohort 12 months ago, how much did we keep (gross retention) and how much did we keep INCLUDING expansion (net retention)?"
 
-*Summary of the Output :*
+*Summary of the Output :* Across monthly cohorts, Gross Revenue Retention (GRR) is consistently well below 80%, often near 0–7%, indicating severe retention issues. Net Revenue Retention (NRR) is negative in almost all cohorts (values between –0.3 and –1.0), meaning expansion is not offsetting churn. A few cohorts show modest expansion. Overall, the company is in a retention crisis: most cohorts lose nearly all their starting MRR within 12 months.
 
 *Sanity checks :*  
+1. grr <= 1.0
+2. nrr can exceed 1.0 (this is good news, not a bug). No value >1 was observed.
+3. grr + (churn_mrr / starting_mrr) ≈ 1.0
 
-*Interpretation :*  
+*Interpretation :*  Retention problem: GRR consistently below 80% (often near 0%) meaning customers are not sticking around.
+Expansion insufficient: Even when expansion occurs, churn wipes out gains, leaving NRR negative.
+Cohort volatility: Some months show small retained MRR, but the pattern is not sustained.
+Strategic implication: The company is firmly in the “retention problem” world, growth spend will not fix this until churn is addressed.
 
 *Actionable Takeaways :*
+1. Run cuts by plan tier, region, and customer segment to identify where churn is concentrated
+2. GRR < 80% across the board means product/experience issues are driving customer exits.
+3. Strengthen onboarding, support, and engagement programs to reduce early churn.
+4. Retention collapse — GRR near 0%, NRR negative. Focus must be on fixing churn before pursuing growth.
 
 **Query S4 — Feature Adoption vs Retention**
 
 *Business question:* "Which product features predict 90-day retention? Which are red herrings?"
 
-*Summary of the Output :*
+*Summary of the Output :* The query compares 90‑day retention rates between accounts that adopted a feature vs. those that did not. Some features show positive retention lift (e.g. Shared Reports, API Access, Real‑time Dashboard, Custom Fields, Funnel Analysis). Many features show negative lift, meaning adopters retained worse than non‑adopters (e.g. Dashboard, Live Chat, Custom Branding, Salesforce Sync, Automations).
 
-*Sanity checks :*  
+Several features have no measurable lift (Priority Support, Advanced Analytics, Webhook Support, SSO, Bulk Export, Desktop App).
 
-*Interpretation :*  
+*Sanity checks :*  accounts_adopted + accounts_not_adopted = total_eligible_accounts
 
-*Actionable Takeaways :*
+*Interpretation :* Positive signals: Shared Reports (+16.7pp, +20%) → strongest credible lift.
+API Access (+5.9pp, +7.8%), Real‑time Dashboard (+5.9pp, +6.3%), Custom Fields (+4.8pp, +5%), Funnel Analysis (+3.5pp, +4.2%) → moderate lifts.
+Neutral features: Priority Support, Advanced Analytics, Webhook Support, SSO, Bulk Export, Desktop App — no measurable impact.
+Negative signals (red herrings): Dashboard (–10.8pp), Live Chat (–11.7pp), Custom Branding (–12.5pp), Salesforce Sync (–13.3pp), Automations (–62.5pp). These features correlate with lower retention, likely due to selection bias or poor adoption experience.
+Selection bias caveat: Accounts adopting many features are systematically different from those adopting few. A naive comparison may overstate impact. A more rigorous approach would control for usage intensity or run propensity‑matched analysis. 
+
+*Actionable Takeaways :* 
+1. Shared Reports shows the largest credible lift (+16.7pp). Prioritize discoverability push (in‑app prompt, onboarding placement). Run a cohort cut by company size or plan tier to see if Shared Reports’ lift is consistent across segments.
+3. API Access, Real‑time Dashboard, Custom Fields, Funnel Analysis secondary features worth deeper investigation.
+4. Dashboard, Live Chat, Custom Branding, Salesforce Sync, Automations, do not prioritize. Investigate whether adoption correlates with struggling accounts.
 
 **Query S5 — Expansion Revenue: Who's Upgrading and Why**
 
 *Business question:* "Of accounts that expanded MRR in the last 6 months, what's the dominant expansion vector — seats added, plan upgrade, or add-on attach?"
 
-*Summary of the Output :*
+*Summary of the Output :* Seats added dominate expansion revenue, they generate the highest MRR and happen relatively early (~49 days). Plan upgrades involve more accounts but contribute less per account and occur much later (~417 days). Add‑ons are negligible, with only one account expanded.
 
 *Sanity checks :*  
 
-*Interpretation :*  
+*Interpretation :*  Expansion is primarily seat‑driven, showing that customers scale usage quickly after signup. Plan upgrades are a slower, long‑tail motion with modest revenue impact. Add‑ons barely register, suggesting limited adoption or poor cross‑sell visibility.
 
 *Actionable Takeaways :*
+1. Invest in seat‑management UX and admin features to maximize expansion revenue.
+2. Plan upgrades can be improved with clearer tier differentiation and better upgrade prompts.
+3. Add‑ons should be deprioritized until retention and adoption improve.
